@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>replace()</title>
+</head>
+<body>
+    <div style="width: 300px; height: 300px;">
+    <img style="width: 200px; height: 100px; text-align: center; line-height: 300px;" id="img" src="">
+    </div>
+    <input type="file"  onchange="displayimg(this)"  name="myfile">
+    
+</body>
+<script>  
+    function displayimg(input){  //获取第一个文件对象 （如果有多张时可使用循环files数组改变多个<img>的 src值
+        console.log(input.files)
+        var file = input.files[0];  //判断当前是否支持使用FileReader  
+        if(window.FileReader){   //创建读取文件的对象   
+            var fr = new FileReader();   //以读取文件字符串的方式读取文件 但是不能直接读取file   //因为文件的内容是存在file对象下面的files数组中的   //该方法结束后图片会以data:URL格式的字符串（base64编码）存储在fr对象的result中   
+            fr.readAsDataURL(file);   
+            fr.onloadend = function(){    document.getElementById("img").src = fr.result;   
+            }  
+            } 
+            }
+</script>
+</html>
